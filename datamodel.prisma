@@ -1,0 +1,14 @@
+type User {
+  id: ID! @id
+  name: String! @unique
+  passwordHash: String!
+  admin: Boolean! @default(value: false)
+  todos: [Todo!]!
+}
+
+type Todo {
+  id: ID! @id
+  text: String!
+  complete: Boolean! @default(value: false)
+  user: User @relation(link: INLINE)
+}

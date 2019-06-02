@@ -1,0 +1,17 @@
+{
+  "extends": "tslint-config-semistandard",
+  "rules": {
+    "arrow-parens": true,
+    "space-before-function-paren": [
+      true,
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ]
+  },
+  "linterOptions": {
+    "exclude": ["generated/**/*.ts"]
+  }
+}
