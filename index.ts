@@ -163,13 +163,12 @@ const Mutation: MutationType = prismaObjectType({
     t.field('createTodo', {
       type: 'Todo',
       args: {
-        text: stringArg({ nullable: false }),
-        userId: idArg({ nullable: false })
+        text: stringArg({ nullable: false })
       },
-      resolve: (_, { text, userId }, ctx) =>
+      resolve: (_, { text }, ctx) =>
         ctx.prisma.createTodo({
           text,
-          user: { connect: { id: userId } }
+          user: { connect: { id: ctx.claims.id } }
         })
     });
 
