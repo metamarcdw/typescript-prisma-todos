@@ -99,9 +99,13 @@ const Mutation: MutationType = prismaObjectType({
         password: stringArg({ nullable: false })
       },
       resolve: async (_, { username, password }, ctx) => {
-        const { passwordHash, ...user } = await ctx.prisma.user({
+        const wholeUser = await ctx.prisma.user({
           name: username
         });
+        if (!wholeUser) {
+          throw new Error('User does not exist.');
+        }
+        const { passwordHash, ...user } = wholeUser;
         const isPasswordValid: boolean = await bcrypt.compare(
           password,
           passwordHash
