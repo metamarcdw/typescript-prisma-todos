@@ -79,7 +79,8 @@ const Query: QueryType = prismaObjectType({
 
     t.list.field('todosByUser', {
       type: 'Todo',
-      resolve: (_root, _args, ctx) => ctx.prisma.user({ id: ctx.claims.id }).todos()
+      resolve: (_root, _args, ctx) =>
+        ctx.prisma.user({ id: ctx.claims.id }).todos()
     });
   }
 });
