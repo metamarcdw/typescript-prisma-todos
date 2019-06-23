@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "tsc && node ./dist/index.js",
+    "test": "ts-node index.ts",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./",
     "seed:create": "ts-node ./seed/create.ts",
     "seed:print": "ts-node ./seed/print.ts",
@@ -23,6 +24,7 @@
     "nexus-prisma": "^0.3.7"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.27",
     "@types/bcrypt": "^3.0.0",
     "@types/graphql": "^14.2.0",
     "@types/jsonwebtoken": "^8.3.2",
