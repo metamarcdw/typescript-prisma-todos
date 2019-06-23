@@ -79,7 +79,7 @@ const Query: QueryType = prismaObjectType({
 
     t.list.field('todosByUser', {
       type: 'Todo',
-      resolve: (_, _args, ctx) => ctx.prisma.user({ id: ctx.claims.id }).todos()
+      resolve: (_root, _args, ctx) => ctx.prisma.user({ id: ctx.claims.id }).todos()
     });
   }
 });
@@ -98,7 +98,7 @@ const Mutation: MutationType = prismaObjectType({
         username: stringArg({ nullable: false }),
         password: stringArg({ nullable: false })
       },
-      resolve: async (_, { username, password }, ctx) => {
+      resolve: async (_root, { username, password }, ctx) => {
         const wholeUser = await ctx.prisma.user({
           name: username
         });
@@ -127,7 +127,7 @@ const Mutation: MutationType = prismaObjectType({
         username: stringArg({ nullable: false }),
         password: stringArg({ nullable: false })
       },
-      resolve: async (_, { username, password }, ctx) => {
+      resolve: async (_root, { username, password }, ctx) => {
         const existingUser: User = await ctx.prisma.user({
           name: username
         });
@@ -149,7 +149,7 @@ const Mutation: MutationType = prismaObjectType({
       args: {
         id: idArg({ nullable: false })
       },
-      resolve: (_, { id }, ctx) => {
+      resolve: (_root, { id }, ctx) => {
         if (!ctx.claims.admin) {
           throw new Error('Must be logged in as an admin.');
         }
@@ -165,7 +165,7 @@ const Mutation: MutationType = prismaObjectType({
       args: {
         text: stringArg({ nullable: false })
       },
-      resolve: (_, { text }, ctx) =>
+      resolve: (_root, { text }, ctx) =>
         ctx.prisma.createTodo({
           text,
           user: { connect: { id: ctx.claims.id } }
@@ -177,7 +177,7 @@ const Mutation: MutationType = prismaObjectType({
       args: {
         id: idArg({ nullable: false })
       },
-      resolve: (_, { id }, ctx) =>
+      resolve: (_root, { id }, ctx) =>
         ctx.prisma.updateTodo({
           where: { id },
           data: { complete: true }
