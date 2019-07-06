@@ -7,6 +7,8 @@
     "start": "tsc && node ./dist/index.js",
     "test": "ts-node index.ts",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./",
+    "up": "docker-compose up -d",
+    "deploy": "npx prisma deploy",
     "seed:create": "ts-node ./seed/create.ts",
     "seed:print": "ts-node ./seed/print.ts",
     "seed:delete": "ts-node ./seed/delete.ts"
