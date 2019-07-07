@@ -10,7 +10,7 @@ async function main(): Promise<void> {
       const newUser: User = await prisma.createUser({
         name: user.name.first,
         passwordHash,
-        admin: index === 0 ? true : false,
+        admin: index === 0,
         todos: {
           create: [
             {
